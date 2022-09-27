@@ -87,7 +87,12 @@ const TableWithFilters = ({
                     onSearch={setSearchBarValue}
                 />
                 <div className={s.filters}></div>
-                <TableWithFilters />
+                <TableWithFilters
+                    filterFields={filterFields}
+                    columnsFilterOptions={columnsFilterOptions}
+                    onTableFilterApply={setFilterValue}
+                    onColumnsFilterApply={setShowedColumns}
+                />
             </div>
             <Table showRows={10} columns={columns} data={data} />
         </div>

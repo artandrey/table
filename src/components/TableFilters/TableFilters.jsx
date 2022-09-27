@@ -13,8 +13,8 @@ const TableFilters = ({
                 fields={filterFields}
             />
             <FloatingColumnsFilter
-                onFilterApply={setShowedColumns}
-                columns={onColumnsFilterApply}
+                onFilterApply={onColumnsFilterApply}
+                columns={columnsFilterOptions}
             />
         </div>
     );
