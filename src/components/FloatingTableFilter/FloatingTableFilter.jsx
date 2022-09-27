@@ -16,7 +16,7 @@ const FloatingTableFilter = ({ fields, onFilterApply }) => {
             );
             onFilterApply && onFilterApply(filterValue);
         },
-        [onFilterApply]
+        [onFilterApply, fields]
     );
     const handleReset = useCallback(
         (event) => {
@@ -26,12 +26,10 @@ const FloatingTableFilter = ({ fields, onFilterApply }) => {
     );
     return (
         <FloatingTableWrapper formId={formId}>
-            <form onSubmit={handleSubmit} id={formId}>
+            <form onSubmit={handleSubmit} onReset={handleReset} id={formId}>
                 {fields.map((fieldSet) => (
                     <Details key={fieldSet.title}>
-                        <div>
-                            <h3>{fieldSet.title}</h3>
-                        </div>
+                        {fieldSet.title}
                         <div>
                             {fieldSet.fields.map((field) => (
                                 <label key={field}>

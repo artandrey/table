@@ -1,0 +1,33 @@
+.wrapper {
+    width: 285px;
+    padding: 20px 10px;
+    border: 1px solid #979797;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.heading {
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #979797;
+}
+
+.clearButton {
+    font-size: 10px;
+    letter-spacing: -0.27px;
+    line-height: 11px;
+    color: #000ad2;
+    background-color: transparent;
+    border: none;
+}
+
+.saveButton {
+    padding: 8px 27px;
+    background-color: #000ad2;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: -0.38px;
+    line-height: 16px;
+    border: none;
+}

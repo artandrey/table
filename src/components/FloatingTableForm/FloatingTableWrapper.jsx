@@ -1,16 +1,17 @@
-import React, { useId } from 'react';
+import React from 'react';
+import s from './FloatingTableWrapper.module.scss';
 
-const FloatingTableWrapper = ({ children, formId }) => {
+const FloatingTableWrapper = ({ children, formId, title }) => {
     return (
-        <div>
-            <div>
-                <h2></h2>
-                <button form={formId} type="reset">
+        <div className={s.wrapper}>
+            <div className={s.heading}>
+                <h2>{title}</h2>
+                <button className={s.clearButton} form={formId} type="reset">
                     Clear all
                 </button>
             </div>
             {children}
-            <button form={formId} type="submit">
+            <button className={s.saveButton} form={formId} type="submit">
                 Save
             </button>
         </div>
