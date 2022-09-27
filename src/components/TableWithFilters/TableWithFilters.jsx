@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import FloatingColumnsFilter from '../FloatingColumnsFilter/FloatingColumnsFilter';
-import FloatingTableFilter from '../FloatingTableFilter/FloatingTableFilter';
 import SearchBar from '../SearchBar/SearchBar';
 import Table from '../Table/Table';
+import TableFilters from '../TableFilters/TableFilters';
 import s from './TableWithFilters.module.scss';
 
 const preparePlaceholder = function (searchBy) {
@@ -86,13 +85,11 @@ const TableWithFilters = ({
                     placeholder={'Search by ' + preparePlaceholder(searchBy)}
                     onSearch={setSearchBarValue}
                 />
-                <FloatingTableFilter
-                    onFilterApply={setFilterValue}
-                    fields={filterFields}
-                />
-                <FloatingColumnsFilter
-                    onFilterApply={setShowedColumns}
-                    columns={columnsFilterOptions}
+                <TableFilters
+                    filterFields={filterFields}
+                    columnsFilterOptions={columnsFilterOptions}
+                    onTableFilterApply={setFilterValue}
+                    onColumnsFilterApply={setShowedColumns}
                 />
             </div>
             <Table showRows={10} columns={columns} data={data} />

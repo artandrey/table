@@ -50,8 +50,10 @@ export const TableBody = ({ rows, prepareRow }) => {
 };
 
 const Table = ({ className, data, columns, showRows, ...otherProps }) => {
-    const { getTableProps, headerGroups, rows, prepareRow, getTableBodyProps } =
-        useTable({ columns, data }, useSortBy);
+    const { getTableProps, headerGroups, rows, prepareRow } = useTable(
+        { columns, data },
+        useSortBy
+    );
     const [pageNumber, setPageNumber] = useState(1);
     const showStart = showRows * (pageNumber - 1);
     const showEnd = showRows * pageNumber;

@@ -1,4 +1,6 @@
 import React from 'react';
+import FloatingColumnsFilter from '../FloatingColumnsFilter/FloatingColumnsFilter';
+import FloatingTableFilter from '../FloatingTableFilter/FloatingTableFilter';
 
 const TableFilters = ({
     filterFields,

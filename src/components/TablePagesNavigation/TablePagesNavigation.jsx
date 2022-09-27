@@ -12,7 +12,7 @@ const TablePagesNavigation = ({
         setPageNumber((index) =>
             index + showNumbers < pagesCount ? index + 1 : index
         );
-    }, [setPageNumber]);
+    }, [setPageNumber, pagesCount, showNumbers]);
     const previous = useCallback(() => {
         setPageNumber((index) => (index >= 0 ? index - 1 : index));
     }, [setPageNumber]);
