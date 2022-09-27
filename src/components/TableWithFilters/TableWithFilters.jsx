@@ -86,12 +86,13 @@ const TableWithFilters = ({
                     placeholder={'Search by ' + preparePlaceholder(searchBy)}
                     onSearch={setSearchBarValue}
                 />
-                <div className={s.filters}></div>
-                <TableWithFilters
-                    filterFields={filterFields}
-                    columnsFilterOptions={columnsFilterOptions}
-                    onTableFilterApply={setFilterValue}
-                    onColumnsFilterApply={setShowedColumns}
+                <FloatingTableFilter
+                    onFilterApply={setFilterValue}
+                    fields={filterFields}
+                />
+                <FloatingColumnsFilter
+                    onFilterApply={setShowedColumns}
+                    columns={columnsFilterOptions}
                 />
             </div>
             <Table showRows={10} columns={columns} data={data} />
