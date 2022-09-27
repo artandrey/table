@@ -1,0 +1,28 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.searchbar {
+    padding: 12px;
+    border: 1px solid #979797;
+    border-radius: 8px 0 0 8px;
+    background-color: #ffffff;
+    font-family: Arial;
+    font-size: 12px;
+    letter-spacing: -0.33px;
+    line-height: 14px;
+}
+
+.button {
+    width: 134px;
+    display: block;
+    background-color: #000ad2;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    letter-spacing: -0.38px;
+    line-height: 16px;
+    border: none;
+}
