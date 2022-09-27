@@ -26,6 +26,13 @@
         rotate: 90deg;
     }
 }
+.details[open] {
+    .summary {
+        &::after {
+            rotate: 270deg;
+        }
+    }
+}
 
 .content {
     padding: 15px 17px;

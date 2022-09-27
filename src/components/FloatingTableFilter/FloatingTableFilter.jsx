@@ -39,6 +39,7 @@ const FloatingTableFilter = ({ fields, onFilterApply, onClose }) => {
                         <div className={s.fieldsWrapper}>
                             {fieldSet.fields.map((field) => (
                                 <Checkbox
+                                    key={field}
                                     name={fieldSet.accessor}
                                     value={field}
                                     defaultChecked

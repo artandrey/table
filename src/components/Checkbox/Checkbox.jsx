@@ -5,7 +5,7 @@ const Checkbox = ({ children, ...otherProps }) => {
         <label class="control control-checkbox">
             {children}
             <input {...otherProps} type="checkbox" />
-            <div class="control_indicator"></div>
+            <div className="control_indicator"></div>
         </label>
     );
 };
