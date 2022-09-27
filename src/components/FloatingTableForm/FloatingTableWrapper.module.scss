@@ -5,6 +5,12 @@
     border-radius: 8px;
     background-color: #ffffff;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.3);
+    h2 {
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: -0.44px;
+        line-height: 18px;
+    }
 }
 .heading {
     padding-bottom: 16px;
@@ -23,6 +29,7 @@
 }
 
 .saveButton {
+    margin-top: 6px;
     padding: 8px 27px;
     background-color: #000ad2;
     color: #ffffff;

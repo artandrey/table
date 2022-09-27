@@ -1,30 +1,42 @@
 import React, { useCallback, useId } from 'react';
+import Checkbox from '../Checkbox/Checkbox';
 import FloatingTableWrapper from '../FloatingTableForm/FloatingTableWrapper';
+import s from './FloatingTableFilter.module.scss';
 
 const FloatingColumnsFilter = ({ columns, onFilterApply }) => {
     const formId = useId();
-    const handleSubmit = useCallback((event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        onFilterApply && onFilterApply(formData.getAll('column'));
-    }, []);
+    const handleSubmit = useCallback(
+        (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            onFilterApply && onFilterApply(formData.getAll('column'));
+        },
+        [onFilterApply]
+    );
 
-    const handleReset = useCallback((event) => {
-        onFilterApply && onFilterApply(null);
-    });
+    const handleReset = useCallback(
+        (event) => {
+            onFilterApply && onFilterApply(null);
+        },
+        [onFilterApply]
+    );
     return (
-        <FloatingTableWrapper formId={formId}>
-            <form onSubmit={handleSubmit} onReset={handleReset} id={formId}>
+        <FloatingTableWrapper title="Add/Remove Columns" formId={formId}>
+            <form
+                className={s.form}
+                onSubmit={handleSubmit}
+                onReset={handleReset}
+                id={formId}
+            >
                 {columns.map((column) => (
-                    <label key={column.Title}>
-                        <input
-                            type="checkbox"
-                            name="column"
-                            value={column.accessor}
-                            defaultChecked={column.showByDefault}
-                        />
-                        <span>{column.Title}</span>
-                    </label>
+                    <Checkbox
+                        key={column.Title}
+                        name="column"
+                        value={column.accessor}
+                        defaultChecked={column.showByDefault}
+                    >
+                        {column.Title}
+                    </Checkbox>
                 ))}
             </form>
         </FloatingTableWrapper>

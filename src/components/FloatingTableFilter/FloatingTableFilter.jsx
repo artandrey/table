@@ -1,4 +1,5 @@
 import React, { useCallback, useId } from 'react';
+import Checkbox from '../Checkbox/Checkbox';
 import Details from '../Details/Details';
 import FloatingTableWrapper from '../FloatingTableForm/FloatingTableWrapper';
 
@@ -25,22 +26,20 @@ const FloatingTableFilter = ({ fields, onFilterApply }) => {
         [onFilterApply]
     );
     return (
-        <FloatingTableWrapper formId={formId}>
+        <FloatingTableWrapper title={'Filter'} formId={formId}>
             <form onSubmit={handleSubmit} onReset={handleReset} id={formId}>
                 {fields.map((fieldSet) => (
                     <Details key={fieldSet.title}>
                         {fieldSet.title}
                         <div>
                             {fieldSet.fields.map((field) => (
-                                <label key={field}>
-                                    <input
-                                        name={fieldSet.accessor}
-                                        value={field}
-                                        type="checkbox"
-                                        defaultChecked
-                                    />
-                                    <span>{field}</span>
-                                </label>
+                                <Checkbox
+                                    name={fieldSet.accessor}
+                                    value={field}
+                                    defaultChecked
+                                >
+                                    {field}
+                                </Checkbox>
                             ))}
                         </div>
                     </Details>

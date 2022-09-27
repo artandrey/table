@@ -1,0 +1,19 @@
+.triangles {
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-image: url('../../assets/triangle.png');
+        background-size: contain;
+        margin: 1px;
+        background-repeat: no-repeat;
+    }
+    &::before {
+        rotate: 270deg;
+    }
+    &::after {
+        rotate: 90deg;
+    }
+}

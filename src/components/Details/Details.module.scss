@@ -9,3 +9,19 @@
     line-height: 18px;
     font-weight: 500;
 }
+.summary {
+    padding: 11px 0;
+    display: flex;
+    justify-content: space-between;
+    &::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-image: url('../../assets/triangle-blue.png');
+        background-size: contain;
+        margin: 1px;
+        background-repeat: no-repeat;
+        rotate: 90deg;
+    }
+}

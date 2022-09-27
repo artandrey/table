@@ -6,7 +6,7 @@ const Details = ({ children }) => {
     return (
         <details className={s.details}>
             <summary>
-                <div>
+                <div className={s.summary}>
                     <h3 className={s.detailsHeader}>{summary}</h3>
                 </div>
             </summary>

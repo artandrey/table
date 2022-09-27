@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSortBy, useTable } from 'react-table';
 import TablePagesNavigation from '../TablePagesNavigation/TablePagesNavigation';
+import Triangles from '../Triangles/Triangles';
 import s from './Table.module.scss';
 
 export const TableHead = ({ headerGroups }) => {
@@ -14,14 +15,10 @@ export const TableHead = ({ headerGroups }) => {
                                 column.getSortByToggleProps()
                             )}
                         >
-                            <span>
-                                {column.isSorted
-                                    ? column.isSortedDesc
-                                        ? ' 🔽'
-                                        : ' 🔼'
-                                    : ''}
-                            </span>
-                            {column.render('Header')}
+                            <div className={s.headingCell}>
+                                {column.render('Header')}
+                                <Triangles />
+                            </div>
                         </th>
                     ))}
                 </tr>
