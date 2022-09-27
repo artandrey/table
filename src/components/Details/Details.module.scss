@@ -25,6 +25,11 @@
         background-repeat: no-repeat;
         rotate: 90deg;
     }
+    &__active {
+        &::after {
+            rotate: 180deg;
+        }
+    }
 }
 .details[open] {
     .summary {
@@ -33,7 +38,6 @@
         }
     }
 }
-
 .content {
     padding: 15px 17px;
     background-color: #f5f5f5;

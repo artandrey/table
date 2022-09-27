@@ -85,6 +85,7 @@ const TableWithFilters = ({
                     placeholder={'Search by ' + preparePlaceholder(searchBy)}
                     onSearch={setSearchBarValue}
                 />
+                <span className={s.heading__line} />
                 <TableFilters
                     filterFields={filterFields}
                     columnsFilterOptions={columnsFilterOptions}
