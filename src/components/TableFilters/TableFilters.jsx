@@ -19,12 +19,19 @@ const TableFilters = ({
         setTableFilterOpened(false);
         setColumnsFilterOpened(true);
     }, [setTableFilterOpened, setColumnsFilterOpened]);
+    const closeFilter = useCallback(() => {
+        setTableFilterOpened(false);
+    }, [setTableFilterOpened]);
+    const closeColumns = useCallback(() => {
+        setColumnsFilterOpened(false);
+    }, [setColumnsFilterOpened]);
     return (
         <div className={s.wrapper}>
             <div className={s.filterWrapper}>
                 <button onClick={openFilter}>Filter</button>
                 {tableFilterOpened && (
                     <FloatingTableFilter
+                        onClose={closeFilter}
                         onFilterApply={onTableFilterApply}
                         fields={filterFields}
                     />
@@ -34,6 +41,7 @@ const TableFilters = ({
                 <button onClick={openColumns}>Columns</button>
                 {columnsFilterOpened && (
                     <FloatingColumnsFilter
+                        onClose={closeColumns}
                         onFilterApply={onColumnsFilterApply}
                         columns={columnsFilterOptions}
                     />
