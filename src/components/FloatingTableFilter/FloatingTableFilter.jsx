@@ -2,8 +2,9 @@ import React, { useCallback, useId } from 'react';
 import Checkbox from '../Checkbox/Checkbox';
 import Details from '../Details/Details';
 import FloatingTableWrapper from '../FloatingTableForm/FloatingTableWrapper';
+import s from './FloatingTableFilter.module.scss';
 
-const FloatingTableFilter = ({ fields, onFilterApply }) => {
+const FloatingTableFilter = ({ fields, onFilterApply, onClose }) => {
     const formId = useId();
     const handleSubmit = useCallback(
         (event) => {
@@ -26,12 +27,16 @@ const FloatingTableFilter = ({ fields, onFilterApply }) => {
         [onFilterApply]
     );
     return (
-        <FloatingTableWrapper title={'Filter'} formId={formId}>
+        <FloatingTableWrapper
+            title={'Filter'}
+            formId={formId}
+            onClose={onClose}
+        >
             <form onSubmit={handleSubmit} onReset={handleReset} id={formId}>
                 {fields.map((fieldSet) => (
                     <Details key={fieldSet.title}>
                         {fieldSet.title}
-                        <div>
+                        <div className={s.fieldsWrapper}>
                             {fieldSet.fields.map((field) => (
                                 <Checkbox
                                     name={fieldSet.accessor}

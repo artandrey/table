@@ -10,7 +10,7 @@ const Details = ({ children }) => {
                     <h3 className={s.detailsHeader}>{summary}</h3>
                 </div>
             </summary>
-            <div>{content}</div>
+            <div className={s.content}>{content}</div>
         </details>
     );
 };

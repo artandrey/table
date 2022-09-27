@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import s from './FloatingTableWrapper.module.scss';
 
-const FloatingTableWrapper = ({ children, formId, title }) => {
+const FloatingTableWrapper = ({ children, formId, title, onClose }) => {
+    const close = useCallback(() => {
+        onClose && onClose();
+    }, [onClose]);
     return (
         <div className={s.wrapper}>
             <div className={s.heading}>
@@ -11,7 +14,12 @@ const FloatingTableWrapper = ({ children, formId, title }) => {
                 </button>
             </div>
             {children}
-            <button className={s.saveButton} form={formId} type="submit">
+            <button
+                onClick={close}
+                className={s.saveButton}
+                form={formId}
+                type="submit"
+            >
                 Save
             </button>
         </div>

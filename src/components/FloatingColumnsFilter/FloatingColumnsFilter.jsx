@@ -3,7 +3,7 @@ import Checkbox from '../Checkbox/Checkbox';
 import FloatingTableWrapper from '../FloatingTableForm/FloatingTableWrapper';
 import s from './FloatingTableFilter.module.scss';
 
-const FloatingColumnsFilter = ({ columns, onFilterApply }) => {
+const FloatingColumnsFilter = ({ columns, onFilterApply, onClose }) => {
     const formId = useId();
     const handleSubmit = useCallback(
         (event) => {
@@ -21,7 +21,11 @@ const FloatingColumnsFilter = ({ columns, onFilterApply }) => {
         [onFilterApply]
     );
     return (
-        <FloatingTableWrapper title="Add/Remove Columns" formId={formId}>
+        <FloatingTableWrapper
+            title="Add/Remove Columns"
+            formId={formId}
+            onClose={onClose}
+        >
             <form
                 className={s.form}
                 onSubmit={handleSubmit}

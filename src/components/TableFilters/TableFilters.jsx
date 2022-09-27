@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import FloatingColumnsFilter from '../FloatingColumnsFilter/FloatingColumnsFilter';
 import FloatingTableFilter from '../FloatingTableFilter/FloatingTableFilter';
+import s from './TableFilters.module.scss';
 
 const TableFilters = ({
     filterFields,
@@ -19,8 +20,8 @@ const TableFilters = ({
         setColumnsFilterOpened(true);
     }, [setTableFilterOpened, setColumnsFilterOpened]);
     return (
-        <div>
-            <div>
+        <div className={s.wrapper}>
+            <div className={s.filterWrapper}>
                 <button onClick={openFilter}>Filter</button>
                 {tableFilterOpened && (
                     <FloatingTableFilter
@@ -29,7 +30,7 @@ const TableFilters = ({
                     />
                 )}
             </div>
-            <div>
+            <div className={s.filterWrapper}>
                 <button onClick={openColumns}>Columns</button>
                 {columnsFilterOpened && (
                     <FloatingColumnsFilter
