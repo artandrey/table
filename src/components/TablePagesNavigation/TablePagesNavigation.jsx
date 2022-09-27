@@ -1,30 +1,35 @@
 import React, { useCallback, useState } from 'react';
+import s from './TablePagesNavigation.module.scss';
 
 const TablePagesNavigation = ({
-    currentPage = 0,
+    currentPage = 1,
     showNumbers = 5,
     pagesCount,
     onChange,
 }) => {
-    const [pageIndex, setPageIndex] = useState(currentPage);
+    const [pageNumber, setPageNumber] = useState(currentPage);
     const next = useCallback(() => {
-        setPageIndex((index) => (index + 1 < pagesCount ? index + 1 : index));
-    }, [setPageIndex]);
+        setPageNumber((index) =>
+            index + showNumbers < pagesCount ? index + 1 : index
+        );
+    }, [setPageNumber]);
     const previous = useCallback(() => {
-        setPageIndex((index) => (index > 0 ? index - 1 : index));
-    }, [setPageIndex]);
+        setPageNumber((index) => (index >= 0 ? index - 1 : index));
+    }, [setPageNumber]);
     const handleChange = useCallback(
         (event) => {
-            const value = event.target.value;
-            onChange && onChange(+value);
+            const value = +event.target.value;
+            setPageNumber(value);
+            onChange && onChange(value);
         },
         [onChange]
     );
     const items = [];
     for (let i = 0; i < showNumbers; i++) {
-        const number = pageIndex + i + 1;
+        const number = pageNumber + i;
+        if (number >= pagesCount) break;
         items[i] = (
-            <li key={`item_${number}`}>
+            <li className={s.list__item} key={`item_${number}`}>
                 <label>
                     <span>{number}</span>
                     <input type="radio" name="page" value={number} />
@@ -33,9 +38,11 @@ const TablePagesNavigation = ({
         );
     }
     return (
-        <div>
+        <div className={s.wrapper}>
             <button onClick={previous}>previous</button>
-            <ul onChange={handleChange}>{items}</ul>
+            <ul className={s.list} onChange={handleChange}>
+                {items}
+            </ul>
             <button onClick={next}>next</button>
         </div>
     );

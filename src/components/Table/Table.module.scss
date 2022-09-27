@@ -1,0 +1,33 @@
+.table {
+    border: 1px solid #979797;
+    border-collapse: collapse;
+    font-family: Arial;
+
+    th,
+    td {
+        padding: 12px 10px;
+        border: 1px solid #979797;
+    }
+    thead {
+        border-bottom: 2px solid #000078;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: -0.35px;
+        line-height: 15px;
+    }
+    tbody {
+        font-size: 12px;
+        letter-spacing: -0.33px;
+        line-height: 14px;
+        tr:nth-child(2n - 1) {
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+.bottom {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -63,14 +63,15 @@ const Table = ({ className, data, columns, showRows, ...otherProps }) => {
                 <TableBody rows={showedRows} prepareRow={prepareRow} />
             </table>
             {showRows && (
-                <div>
+                <div className={s.bottom}>
                     <span>
-                        Showing {showStart + 1} to {showEnd} of {rows.length}{' '}
-                        rows
+                        Showing <strong>{showStart + 1}</strong> to{' '}
+                        <strong>{showEnd}</strong> of{' '}
+                        <strong>{rows.length}</strong> rows
                     </span>
                     <TablePagesNavigation
                         showNumbers={5}
-                        pagesCount={rows.length}
+                        pagesCount={Math.ceil(rows.length / showRows)}
                         onChange={setPageNumber}
                     />
                 </div>

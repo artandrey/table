@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    &__item {
+        width: 30px;
+        text-align: center;
+        input {
+            display: none;
+        }
+    }
+}
