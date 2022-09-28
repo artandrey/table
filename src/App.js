@@ -6,10 +6,10 @@ function App() {
     const data = React.useMemo(() => tableData, []);
     const columns = React.useMemo(
         () =>
-            Object.keys(tableData[0]).map((el) => ({
+            Object.keys(tableData[0]).map((el, i) => ({
                 Header: el.split('_').join(' '),
                 accessor: el,
-                showByDefault: true,
+                showByDefault: i < 5,
                 Title: el
                     .split('_')
                     .map((el) => {

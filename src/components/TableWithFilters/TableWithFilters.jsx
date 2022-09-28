@@ -34,7 +34,11 @@ const TableWithFilters = ({
 }) => {
     const [searchBarValue, setSearchBarValue] = useState('');
     const [filterValue, setFilterValue] = useState(null);
-    const [showedColumns, setShowedColumns] = useState(null);
+    const [showedColumns, setShowedColumns] = useState(
+        columnsFilterOptions
+            .filter((el) => el.showByDefault)
+            .map((el) => el.accessor)
+    );
 
     data = useMemo(() => {
         return searchBarValue
