@@ -4,7 +4,12 @@ import Details from '../Details/Details';
 import FloatingTableWrapper from '../FloatingTableForm/FloatingTableWrapper';
 import s from './FloatingTableFilter.module.scss';
 
-const FloatingTableFilter = ({ fields, onFilterApply, onClose }) => {
+const FloatingTableFilter = ({
+    fields,
+    onFilterApply,
+    onClose,
+    ...otherProps
+}) => {
     const formId = useId();
     const handleSubmit = useCallback(
         (event) => {
@@ -31,6 +36,7 @@ const FloatingTableFilter = ({ fields, onFilterApply, onClose }) => {
             title={'Filter'}
             formId={formId}
             onClose={onClose}
+            {...otherProps}
         >
             <form onSubmit={handleSubmit} onReset={handleReset} id={formId}>
                 {fields.map((fieldSet) => (

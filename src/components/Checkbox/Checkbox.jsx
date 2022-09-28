@@ -1,11 +1,11 @@
 import React from 'react';
-import './Checkbox.css';
+import s from './Checkbox.module.scss';
 const Checkbox = ({ children, ...otherProps }) => {
     return (
-        <label className="control control-checkbox">
+        <label className={s.control + ' ' + s.control_checkbox}>
             {children}
             <input {...otherProps} type="checkbox" />
-            <div className="control_indicator"></div>
+            <div className={s.control_indicator}></div>
         </label>
     );
 };

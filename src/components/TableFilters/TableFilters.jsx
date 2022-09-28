@@ -29,23 +29,25 @@ const TableFilters = ({
         <div className={s.wrapper}>
             <div className={s.filterWrapper}>
                 <button onClick={openFilter}>Filter</button>
-                {tableFilterOpened && (
-                    <FloatingTableFilter
-                        onClose={closeFilter}
-                        onFilterApply={onTableFilterApply}
-                        fields={filterFields}
-                    />
-                )}
+                <FloatingTableFilter
+                    style={{
+                        display: tableFilterOpened ? 'block' : 'none',
+                    }}
+                    onClose={closeFilter}
+                    onFilterApply={onTableFilterApply}
+                    fields={filterFields}
+                />
             </div>
             <div className={s.filterWrapper}>
                 <button onClick={openColumns}>Columns</button>
-                {columnsFilterOpened && (
-                    <FloatingColumnsFilter
-                        onClose={closeColumns}
-                        onFilterApply={onColumnsFilterApply}
-                        columns={columnsFilterOptions}
-                    />
-                )}
+                <FloatingColumnsFilter
+                    style={{
+                        display: columnsFilterOpened ? 'block' : 'none',
+                    }}
+                    onClose={closeColumns}
+                    onFilterApply={onColumnsFilterApply}
+                    columns={columnsFilterOptions}
+                />
             </div>
         </div>
     );

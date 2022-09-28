@@ -1,7 +1,13 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import s from './FloatingTableWrapper.module.scss';
 
-const FloatingTableWrapper = ({ children, formId, title, onClose }) => {
+const FloatingTableWrapper = ({
+    children,
+    formId,
+    title,
+    onClose,
+    ...otherProps
+}) => {
     const close = useCallback(() => {
         onClose && onClose();
     }, [onClose]);
@@ -20,7 +26,7 @@ const FloatingTableWrapper = ({ children, formId, title, onClose }) => {
     }, [close]);
 
     return (
-        <div ref={ref} className={s.wrapper}>
+        <div onSubmit={close} ref={ref} className={s.wrapper} {...otherProps}>
             <div className={s.heading}>
                 <h2>{title}</h2>
                 <button className={s.clearButton} form={formId} type="reset">
@@ -28,12 +34,7 @@ const FloatingTableWrapper = ({ children, formId, title, onClose }) => {
                 </button>
             </div>
             {children}
-            <button
-                onClick={close}
-                className={s.saveButton}
-                form={formId}
-                type="submit"
-            >
+            <button className={s.saveButton} form={formId} type="submit">
                 Save
             </button>
         </div>
