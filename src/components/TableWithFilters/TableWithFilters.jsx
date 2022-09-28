@@ -29,6 +29,7 @@ const TableWithFilters = ({
     searchBy,
     filterBy,
     columnsFilterOptions,
+    showRows,
     ...otherProps
 }) => {
     const [searchBarValue, setSearchBarValue] = useState('');
@@ -93,7 +94,7 @@ const TableWithFilters = ({
                     onColumnsFilterApply={setShowedColumns}
                 />
             </div>
-            <Table showRows={10} columns={columns} data={data} />
+            <Table showRows={showRows} columns={columns} data={data} />
         </div>
     );
 };

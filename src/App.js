@@ -1,5 +1,4 @@
 import React from 'react';
-import Table from './components/Table/Table';
 import TableWithFilters from './components/TableWithFilters/TableWithFilters';
 import tableData from './audit';
 
@@ -62,6 +61,7 @@ function App() {
                 searchBy={searchBy}
                 filterBy={filterBy}
                 columnsFilterOptions={columns}
+                showRows={10}
             />
         </div>
     );

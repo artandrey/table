@@ -32,7 +32,14 @@
 
 .bottom {
     margin-top: 10px;
+    padding-left: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.tableRowsInfoText {
+    font-size: 12px;
+    letter-spacing: -0.33px;
+    line-height: 14px;
 }

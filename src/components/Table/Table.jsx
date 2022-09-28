@@ -63,7 +63,7 @@ const Table = ({ className, data, columns, showRows, ...otherProps }) => {
             </table>
             {showRows && (
                 <div className={s.bottom}>
-                    <span>
+                    <span className={s.tableRowsInfoText}>
                         Showing <strong>{showStart + 1}</strong> to{' '}
                         <strong>{showEnd}</strong> of{' '}
                         <strong>{rows.length}</strong> rows
