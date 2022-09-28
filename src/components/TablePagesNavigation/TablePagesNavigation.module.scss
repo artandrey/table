@@ -5,11 +5,18 @@
 .list {
     list-style: none;
     display: flex;
+    font-size: 14px;
+    letter-spacing: -0.38px;
+    line-height: 16px;
     &__item {
+        padding: 10px;
         width: 30px;
         text-align: center;
         input {
             display: none;
+        }
+        &__active {
+            border-bottom: solid #0912bc 2px;
         }
     }
 }

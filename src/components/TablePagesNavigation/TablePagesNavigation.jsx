@@ -7,29 +7,41 @@ const TablePagesNavigation = ({
     pagesCount,
     onChange,
 }) => {
-    const [pageNumber, setPageNumber] = useState(currentPage);
+    const [tablePageNumber, setTablePageNumber] = useState(currentPage);
+    const [navigationPageNumber, setNavigationPageNumber] = useState(1);
     const next = useCallback(() => {
-        setPageNumber((index) =>
-            index + showNumbers < pagesCount ? index + 1 : index
+        setNavigationPageNumber((number) =>
+            number + 1 > pagesCount ? number : number + 1
         );
-    }, [setPageNumber, pagesCount, showNumbers]);
+    }, [setNavigationPageNumber]);
     const previous = useCallback(() => {
-        setPageNumber((index) => (index >= 0 ? index - 1 : index));
-    }, [setPageNumber]);
+        setNavigationPageNumber((number) =>
+            number - 1 <= 0 ? number : number - 1
+        );
+    }, [setNavigationPageNumber]);
     const handleChange = useCallback(
         (event) => {
             const value = +event.target.value;
-            setPageNumber(value);
+            setTablePageNumber(value);
             onChange && onChange(value);
         },
-        [onChange]
+        [onChange, setTablePageNumber]
     );
     const items = [];
+    const allowMoveForward = !(navigationPageNumber > pagesCount - showNumbers);
+    const allowMoveBackward = !(navigationPageNumber <= 1);
     for (let i = 0; i < showNumbers; i++) {
-        const number = pageNumber + i;
-        if (number >= pagesCount) break;
+        const number = navigationPageNumber + i;
+        if (number > pagesCount) break;
         items[i] = (
-            <li className={s.list__item} key={`item_${number}`}>
+            <li
+                className={
+                    s.list__item +
+                    ' ' +
+                    (tablePageNumber === number ? s.list__item__active : '')
+                }
+                key={`item_${number}`}
+            >
                 <label>
                     <span>{number}</span>
                     <input type="radio" name="page" value={number} />
@@ -39,11 +51,11 @@ const TablePagesNavigation = ({
     }
     return (
         <div className={s.wrapper}>
-            <button onClick={previous}>previous</button>
+            {allowMoveBackward && <button onClick={previous}>previous</button>}
             <ul className={s.list} onChange={handleChange}>
                 {items}
             </ul>
-            <button onClick={next}>next</button>
+            {allowMoveForward && <button onClick={next}>next</button>}
         </div>
     );
 };
