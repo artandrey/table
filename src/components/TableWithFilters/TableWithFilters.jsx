@@ -30,15 +30,13 @@ const TableWithFilters = ({
     filterBy,
     columnsFilterOptions,
     showRows,
+    select,
+    onRowSelect,
     ...otherProps
 }) => {
     const [searchBarValue, setSearchBarValue] = useState('');
     const [filterValue, setFilterValue] = useState(null);
-    const [showedColumns, setShowedColumns] = useState(
-        columnsFilterOptions
-            .filter((el) => el.showByDefault)
-            .map((el) => el.accessor)
-    );
+    const [showedColumns, setShowedColumns] = useState(null);
 
     data = useMemo(() => {
         return searchBarValue
@@ -98,7 +96,13 @@ const TableWithFilters = ({
                     onColumnsFilterApply={setShowedColumns}
                 />
             </div>
-            <Table showRows={showRows} columns={columns} data={data} />
+            <Table
+                select={select}
+                showRows={showRows}
+                columns={columns}
+                data={data}
+                onRowSelect={onRowSelect}
+            />
         </div>
     );
 };

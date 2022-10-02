@@ -28,6 +28,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        &__selectable {
+            justify-content: center;
+        }
     }
 }
 
@@ -43,4 +46,9 @@
     font-size: 12px;
     letter-spacing: -0.33px;
     line-height: 14px;
+}
+
+.checkboxWrapper {
+    display: flex;
+    justify-content: center;
 }

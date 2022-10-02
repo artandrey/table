@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useRowSelect } from 'react-table';
 import { useSortBy, useTable } from 'react-table';
+import Checkbox from '../Checkbox/Checkbox';
 import TablePagesNavigation from '../TablePagesNavigation/TablePagesNavigation';
 import Triangles from '../Triangles/Triangles';
 import s from './Table.module.scss';
 
-export const TableHead = ({ headerGroups }) => {
+export const TableHead = ({ headerGroups, select, sort }) => {
     return (
         <thead>
             {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                        <th
-                            {...column.getHeaderProps(
-                                column.getSortByToggleProps()
-                            )}
-                        >
-                            <div className={s.headingCell}>
-                                {column.render('Header')}
-                                <Triangles />
-                            </div>
-                        </th>
-                    ))}
+                    {headerGroup.headers.map((column, i) => {
+                        const sortable = i !== 0 && select && sort;
+                        const selectable = i === 0 && select;
+                        return (
+                            <th
+                                {...column.getHeaderProps(
+                                    sortable && column.getSortByToggleProps()
+                                )}
+                            >
+                                <div
+                                    className={
+                                        s.headingCell +
+                                        (selectable
+                                            ? ' ' + s.headingCell__selectable
+                                            : '')
+                                    }
+                                >
+                                    {column.render('Header')}
+                                    {sortable && <Triangles />}
+                                </div>
+                            </th>
+                        );
+                    })}
                 </tr>
             ))}
         </thead>
@@ -46,11 +59,52 @@ export const TableBody = ({ rows, prepareRow }) => {
     );
 };
 
-const Table = ({ className, data, columns, showRows, ...otherProps }) => {
-    const { getTableProps, headerGroups, rows, prepareRow } = useTable(
-        { columns, data },
-        useSortBy
-    );
+const Table = ({
+    className,
+    data,
+    columns,
+    showRows,
+    sort = true,
+    select,
+    onRowSelect,
+    ...otherProps
+}) => {
+    const plugins = useMemo(() => {
+        return [sort && useSortBy, select && useRowSelect].filter(
+            (plugin) => typeof plugin === 'function'
+        );
+    }, [sort, select]);
+    const { getTableProps, headerGroups, rows, prepareRow, selectedFlatRows } =
+        useTable({ columns, data }, ...plugins, (hooks) => {
+            hooks.visibleColumns.push((columns) => [
+                // Let's make a column for selection
+                {
+                    id: 'selection',
+                    // The header can use the table's getToggleAllRowsSelectedProps method
+                    // to render a checkbox
+                    Header: ({ getToggleAllRowsSelectedProps }) => (
+                        <div className={s.checkboxWrapper}>
+                            <Checkbox {...getToggleAllRowsSelectedProps()} />
+                        </div>
+                    ),
+                    // The cell can use the individual row's getToggleRowSelectedProps method
+                    // to the render a checkbox
+                    Cell: ({ row }) => (
+                        <div className={s.checkboxWrapper}>
+                            <Checkbox {...row.getToggleRowSelectedProps()} />
+                        </div>
+                    ),
+                },
+                ...columns,
+            ]);
+        });
+    useEffect(() => {
+        onRowSelect &&
+            onRowSelect(
+                selectedFlatRows.map((slectedRow) => slectedRow.original)
+            );
+    }, [selectedFlatRows, onRowSelect]);
+
     const [pageNumber, setPageNumber] = useState(1);
     const showStart = showRows * (pageNumber - 1);
     const showEnd = showRows * pageNumber;
@@ -58,7 +112,11 @@ const Table = ({ className, data, columns, showRows, ...otherProps }) => {
     return (
         <div>
             <table className={s.table} {...otherProps} {...getTableProps()}>
-                <TableHead headerGroups={headerGroups} />
+                <TableHead
+                    select={select}
+                    sort={sort}
+                    headerGroups={headerGroups}
+                />
                 <TableBody rows={showedRows} prepareRow={prepareRow} />
             </table>
             {showRows && (

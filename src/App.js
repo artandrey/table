@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import TableWithFilters from './components/TableWithFilters/TableWithFilters';
 import tableData from './audit';
 
@@ -9,7 +9,6 @@ function App() {
             Object.keys(tableData[0]).map((el, i) => ({
                 Header: el.split('_').join(' '),
                 accessor: el,
-                showByDefault: i < 5,
                 Title: el
                     .split('_')
                     .map((el) => {
@@ -53,6 +52,11 @@ function App() {
         },
     ];
 
+    const handleSelect = useCallback(
+        (selectedRows) => console.log(selectedRows),
+        []
+    );
+
     return (
         <div>
             <TableWithFilters
@@ -62,6 +66,8 @@ function App() {
                 filterBy={filterBy}
                 columnsFilterOptions={columns}
                 showRows={10}
+                select
+                onRowSelect={handleSelect}
             />
         </div>
     );
