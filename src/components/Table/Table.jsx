@@ -12,7 +12,9 @@ export const TableHead = ({ headerGroups, select, sort }) => {
             {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column, i) => {
-                        const sortable = i !== 0 && select && sort;
+                        const sortable = select
+                            ? i !== 0 && select && sort
+                            : sort;
                         const selectable = i === 0 && select;
                         return (
                             <th
