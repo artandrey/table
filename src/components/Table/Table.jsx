@@ -76,19 +76,15 @@ const Table = ({
     }, [sort, select]);
     const { getTableProps, headerGroups, rows, prepareRow, selectedFlatRows } =
         useTable({ columns, data }, ...plugins, (hooks) => {
+            if (!select) return;
             hooks.visibleColumns.push((columns) => [
-                // Let's make a column for selection
                 {
                     id: 'selection',
-                    // The header can use the table's getToggleAllRowsSelectedProps method
-                    // to render a checkbox
                     Header: ({ getToggleAllRowsSelectedProps }) => (
                         <div className={s.checkboxWrapper}>
                             <Checkbox {...getToggleAllRowsSelectedProps()} />
                         </div>
                     ),
-                    // The cell can use the individual row's getToggleRowSelectedProps method
-                    // to the render a checkbox
                     Cell: ({ row }) => (
                         <div className={s.checkboxWrapper}>
                             <Checkbox {...row.getToggleRowSelectedProps()} />
@@ -99,11 +95,12 @@ const Table = ({
             ]);
         });
     useEffect(() => {
-        onRowSelect &&
+        select &&
+            onRowSelect &&
             onRowSelect(
                 selectedFlatRows.map((slectedRow) => slectedRow.original)
             );
-    }, [selectedFlatRows, onRowSelect]);
+    }, [selectedFlatRows, onRowSelect, select]);
 
     const [pageNumber, setPageNumber] = useState(1);
     const showStart = showRows * (pageNumber - 1);

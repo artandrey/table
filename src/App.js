@@ -69,6 +69,15 @@ function App() {
                 select
                 onRowSelect={handleSelect}
             />
+            <TableWithFilters
+                data={data}
+                columns={columns}
+                searchBy={searchBy}
+                filterBy={filterBy}
+                columnsFilterOptions={columns}
+                showRows={10}
+                onRowSelect={handleSelect}
+            />
         </div>
     );
 }
